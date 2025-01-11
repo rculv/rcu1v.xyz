@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>rcu1v | Home</title>
+    <link rel="icon" type="image/x-icon" href="rcu1vxyz.png">
+    <script>
+        // Function to detect mobile devices and redirect
+        function detectMobile() {
+            // Use window.innerWidth to check the screen size or navigator.userAgent for device detection
+            const isMobile = window.innerWidth <= 768 || /Mobi|Android/i.test(navigator.userAgent);
+            
+            // Redirect to the mobile version if it's a mobile device
+            if (isMobile) {
+                if (window.location.hostname !== 'rcu1v.xyz/mobile') {
+                    window.location.href = 'https://rcu1v.xyz/mobile';
+                }
+            } else {
+                if (window.location.hostname !== 'rcu1v.xyz') {
+                    window.location.href = 'https://rcu1v.xyz';
+                }
+            }
+        }
+    
+        // Call the detectMobile function when the page loads
+        window.onload = detectMobile;
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+        html, body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Roboto', sans-serif;
+            height: 100%;
+            overflow-y: auto; /* Allow vertical scrolling */
+            
+        }
+
+        body {
+            background: linear-gradient(270deg, #1a001f, #2c003e, #3a004e, #1a001f);
+            background-size: 400% 400%;
+            animation: backgroundAnimation 15s ease infinite;
+        }
+
+        @keyframes backgroundAnimation {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        .foreground {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            width: 100%;
+            color: #fff;
+            text-align: center;
+            padding: 50px 20px;
+            box-sizing: border-box;
+        }
+
+        .content-container {
+            background-color: #1f1f1f;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+            padding: 40px;
+            max-width: 900px;
+            width: 90%;
+        }
+        
+        .footer {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            width: 100%;
+            color: #fff;
+            text-align: center;
+            padding: 50px 20px;
+            box-sizing: border-box;
+            padding: 40px;
+            border-radius: 15px 15px 0 0;
+            background-color: #1f1f1f;
+            
+        }
+
+        .profile-section {
+            margin-bottom: 50px;
+        }
+
+        .profile-section img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            margin-bottom: 20px;
+            border: 4px solid #6a1b9a;
+        }
+
+        .name {
+            font-size: 2.5em;
+            font-weight: 700;
+            margin: 10px 0;
+        }
+
+        .info {
+            font-size: 1em;
+            font-weight: 400;
+            color: #bdbdbd;
+        }
+        
+        .buttons {
+            padding-top: 25px;
+        }
+
+        .section {
+            width: 100%;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .section h2 {
+            font-size: 2.5em;
+            color: #6a1b9a;
+            margin-bottom: 10px;
+        }
+
+        .section p {
+            font-size: 1.2em;
+            color: #bdbdbd;
+            margin-bottom: 20px;
+        }
+
+        .section .line {
+            height: 2px;
+            width: 50%;
+            margin: 0 auto 20px auto;
+            background-color: #6a1b9a;
+        }
+
+        .project-frame {
+            background-color: #3f3f3f;
+            padding: 10px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            transition: border 0.3s ease;
+            border: 3px solid transparent; /* Keeps the layout intact */
+        }
+
+        .project-frame:hover {
+            border-color: #6a1b9a; /* Highlight the border on hover */
+        }
+
+        .project-frame img {
+            width: 200px;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px 10px 10px 10px; /* Rounded top-left and top-right corners */
+        }
+
+        .project-content {
+            flex-grow: 1;
+            padding: 20px;
+            text-align: left;
+        }
+
+        .project-title {
+            font-size: 1.8em;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .project-description {
+            font-size: 1.1em;
+            color: #bdbdbd;
+            margin: 10px 0;
+        }
+
+        .languages {
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #bdbdbd;
+        }
+
+        .language-tag {
+            background-color: #6a1b9a;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            margin-right: 10px;
+            font-size: 0.8em; /* Smaller tags */
+        }
+
+        .project-links {
+            margin-top: 20px;
+            text-align: right; /* Align buttons to the right */
+        }
+
+        .btn {
+            background-color: #6a1b9a;
+            color: #fff;
+            padding: 10px 20px;
+            margin-left: 10px;
+            text-decoration: none;
+            font-size: 1em;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #9c4d96;
+        }
+        .project-links img {
+            width: 25px; /* Smaller size for the logo */
+            height: 25px; /* Smaller size for the logo */
+            margin-right: 10px;
+            border-radius: 50%; /* Make the GitHub logo circular */
+            object-fit: contain; /* Ensure the logo fits perfectly inside the circle */
+            vertical-align: middle; /* Center the GitHub logo vertically */
+        }
+
+        /* New section frame styles for Experience, About */
+        .category-frame {
+            background-color: #3f3f3f;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            transition: border 0.3s ease;
+            border: 3px solid transparent;
+        }
+
+        .category-frame:hover {
+            border-color: #6a1b9a;
+        }
+
+        .category-frame p {
+            font-size: 1.2em;
+            color: #bdbdbd;
+            text-align: left;
+        }
+
+        @media (max-width: 768px) {
+            .profile-section img {
+                width: 120px;
+                height: 120px;
+            }
+
+            .name {
+                font-size: 2em;
+            }
+            
+            .dev {
+                font-size: 1.5em;
+            }
+
+            .info {
+                font-size: 0.9em;
+            }
+
+            .section h2 {
+                font-size: 2em;
+            }
+
+            .section p {
+                font-size: 1em;
+            }
+
+            .project-frame {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .project-frame img {
+                margin-bottom: 20px;
+            }
+
+            .btn {
+                margin-top: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="foreground">
+        <div class="content-container">
+            <div class="profile-section">
+                <img src="https://project-eas.com/gallery_gen/e13d550cbaa0144f48c2a05783b72075_504x582_fit.jpg?ts=1736361769" alt="Profile Image">
+                <div class="name">Rhylend Culver</div>
+                <div class="dev">Software Developer | Electrical Engineering Student</div>
+                <div class="info">Greenwood, South Carolina | rculver@project-eas.com</div>
+                <div class="buttons">
+                    <a href="https://github.com/rculv/" target="_blank" class="btn"> Github
+                        </a>
+                        <a href="https://www.linkedin.com/in/rcu1v/" target="_blank" class="btn">Linkedin</a>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h2>Languages</h2>
+                <div class="line"></div>
+                <!-- Language Section -->
+                
+                <div class="project-frame">
+                    <img src="https://rcu1v.xyz/pythonlogo.png" alt="Python Logo">
+                    <div class="project-content">
+                        <div class="project-title">Python</div>
+                        <p>Python is an interpreted, object-oriented, high-level programming language with dynamic semantics.</p>
+                        <div class="languages">
+                            <span class="language-tag">Confident</span>
+                            <span class="language-tag">High Level</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="project-frame">
+                    <img src="https://rcu1v.xyz/javalogo.png" alt="Java Logo">
+                    <div class="project-content">
+                        <div class="project-title">Java</div>
+                        <p>Java is a multiplatform, object-oriented programming language.</p>
+                        <div class="languages">
+                            <span class="language-tag">Learning</span>
+                            <span class="language-tag">Low Level</span>
+                        </div>
+                    </div>
+                </div>
+                
+                
+                <div class="project-frame">
+                    <img src="https://rcu1v.xyz/cpplogo.png" alt="CPP Logo">
+                    <div class="project-content">
+                        <div class="project-title">C++</div>
+                        <p>C++ is a general-purpose, object-oriented programming language known for its performance and efficiency.</p>
+                        <div class="languages">
+                            <span class="language-tag">Learning</span>
+                            <span class="language-tag">Low Level</span>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="section">
+                <h2>Projects</h2>
+                <div class="line"></div>
+
+                <!-- Project 1 -->
+                <div class="project-frame">
+                    <img src="https://avatars.githubusercontent.com/u/193850858?s=400&u=16d50ad000a15b3c0cafba8ec6582f4b993dbcb9&v=40" alt="Project Image">
+                    <div class="project-content">
+                        <div class="project-title">Explorer Autonomous Systems</div>
+                        <p class="project-description">Autonomous vehicle platform, designed with Java, Python and Electron. Explorer Autonomous Systems develops purpose built autonomous vehicles designed for public safety, industrial, and scientific use.</p>
+                        <div class="languages">
+                            <span class="language-tag">Python</span>
+                            <span class="language-tag">Java</span>
+                            <span class="language-tag">C++</span>
+                            <span class="language-tag">Electronjs</span>
+                            <span class="language-tag">In-Progress</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://github.com/Explorer-Autonomous-Systems" target="_blank" class="btn">
+                                <img src="https://github.githubassets.com/assets/GitHub-Mark-ea2971cee799.png" alt="GitHub Logo">
+                                Link to Github
+                            </a>
+                            <a href="https://project-eas.com" target="_blank" class="btn">Link to Website</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 2 -->
+                <div class="project-frame">
+                    <img src="https://avatars.githubusercontent.com/u/128440943?v=4" alt="Project Image">
+                    <div class="project-content">
+                        <div class="project-title">rcu1v.xyz</div>
+                        <p class="project-description">This website, that you the viewer are seeing right now. Built as a portfolio and more official way of keeping up with what I do. Created in only the best of IDEs (Notepad++) because I refuse to pay for Wordpress.</p>
+                        <div class="languages">
+                            <span class="language-tag">HTML</span>
+                            <span class="language-tag">CSS</span>
+                            <span class="language-tag">JavaScript</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://github.com/rculv/rcu1v.xyz" target="_blank" class="btn">
+                                <img src="https://github.githubassets.com/assets/GitHub-Mark-ea2971cee799.png" alt="GitHub Logo">
+                                Link to Github
+                            </a>
+                            <a href="https://rcu1v.xyz" target="_blank" class="btn">Link to Website</a>
+                        </div>
+                    </div>
+                </div>
+                    
+                <!-- Project 3 -->
+                <div class="project-frame">
+                    <img src="mvdslogoWhiteBg.png" alt="Project Image">
+                    <div class="project-content">
+                        <div class="project-title">EAS MVDS</div>
+                        <p class="project-description">The Marine Vehicle Diagnostics System. Designed to standardize marine vehicle diagnostics, similarly to the OBD-II diagnostics platform.</p>
+                        <div class="languages">
+                            <span class="language-tag">C++</span>
+                            <span class="language-tag">Open-Source</span>
+                            <span class="language-tag">In-Progress</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://github.com/Explorer-Autonomous-Systems/EAS_MVDS" target="_blank" class="btn">
+                                <img src="https://github.githubassets.com/assets/GitHub-Mark-ea2971cee799.png" alt="GitHub Logo">
+                                Link to Github
+                            </a>
+                            <a href="https://project-eas.com/eas-mvds" target="_blank" class="btn">Link to Website</a>
+                        </div>
+                    </div>
+                    
+                </div>
+                
+            </div>
+
+            <div class="section">
+                <h2>Experience</h2>
+                <div class="line"></div>
+                <!-- Experience Section -->
+                <div class="category-frame">
+                    <div class="project-title">2022</div>
+                    <p>Q1: Started work on Explorer Autonomous Systems (oficially)</p>
+                </div>
+                <div class="category-frame">
+                    <div class="project-title">2023</div>
+                    <p>Q1: Participated in First Robotics Competition</p>
+                </div>
+                <div class="category-frame">
+                    <div class="project-title">2024</div>
+                    <p>Q1: Started dual-enrollment at Piedmont Technical College</p>
+                </div>
+                <div class="category-frame">
+                    <div class="project-title">2025</div>
+                    <p>Q1: Began work on the EAS MVDS</p>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>About Me</h2>
+                <div class="line"></div>
+                <!-- Experience Section -->
+                <div class="category-frame">
+                        <p>Hi! My name is Rhylend Culver. I am originally from Oregon, but moved in late 2021. I am a 17 year old developer working on furthering my software development and electrical engineering skills. My current main project, Explorer Autonomous Systems is my primary focus. I am interested in working with C++, Java, Python, HTML, and an eventual project which is learning Rust.</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+<footer class="footer">
+    <p1 class="dev">©2025 - Rhylend Culver</p1>
+    <p3 class="info">Website not working? | support@project-eas.com</p3>
+    <p4 class="info">Built using HTML and CSS | Live Laugh Love Roboto</p4>
+</footer>
+</body>
+</html>
